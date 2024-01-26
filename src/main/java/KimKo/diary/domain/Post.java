@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class Post {
     private String userID;
-    private long postID;
+    private Long postID;
     private String title;
     private String content;
-    private LocalDate date;
+    private String date;
 
     public String getUserID() {
         return userID;
@@ -17,11 +17,11 @@ public class Post {
         this.userID = userID;
     }
 
-    public long getPostID() {
+    public Long getPostID() {
         return postID;
     }
 
-    public void setPostID(long postID) {
+    public void setPostID(Long postID) {
         this.postID = postID;
     }
 
@@ -41,11 +41,11 @@ public class Post {
         this.content = content;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

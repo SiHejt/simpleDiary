@@ -27,7 +27,7 @@ public class MemberController {
         if (result == true) {
             httpServletRequest.getSession().invalidate();
             HttpSession session = httpServletRequest.getSession(true);
-            session.setAttribute("userID", loginForm.getUserID());
+            session.setAttribute("userID", loginForm.getuserID());
             session.setMaxInactiveInterval(1800);
 
             return "redirect:/home";
