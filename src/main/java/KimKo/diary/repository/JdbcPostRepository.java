@@ -38,7 +38,7 @@ public class JdbcPostRepository implements PostRepository {
 
     @Override
     public Optional<Post> findPost(String userID) {
-        List<Post> result = jdbcTemplate.query("select * from post where userID = ?", postRowMapper(), userID);
+        List<Post> result = jdbcTemplate.query("SELECT * FROM post WHERE userID = ?", postRowMapper(), userID);
         return result.stream().findAny();
     }
 

@@ -27,7 +27,7 @@ public class JdbcMemberRepository implements MemberRepository{
 
     @Override
     public List<Member> findMember(String userID) {
-        return jdbcTemplate.query("select * from member where userID = ?", memberRowMapper(), userID);
+        return jdbcTemplate.query("SELECT * FROM member WHERE userID = ?", memberRowMapper(), userID);
     }
 
     @Override
