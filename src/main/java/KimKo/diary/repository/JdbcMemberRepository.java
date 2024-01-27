@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class JdbcMemberRepository implements MemberRepository{
-
+//aaa
     private final JdbcTemplate jdbcTemplate;
     @Autowired
     public JdbcMemberRepository(DataSource dataSource) {
