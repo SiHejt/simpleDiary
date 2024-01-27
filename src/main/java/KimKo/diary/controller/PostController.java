@@ -70,7 +70,7 @@ public class PostController {
 
     @PostMapping("/home/viewPost/editPost")
     public String editPost(@RequestParam final Long postID) {
-        postService.editPost(postID);
+        postService.editPostService(postID);
 
         return "redirect:/home";
     }
