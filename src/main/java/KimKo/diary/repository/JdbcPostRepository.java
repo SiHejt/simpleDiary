@@ -8,6 +8,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.security.Timestamp;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +22,17 @@ public class JdbcPostRepository implements PostRepository {
     }
     @Override
     public Post savePost(Post post) {
+        String sql = "INSERT INTO post (userID, title, content, date) VALUES (?, ?, ?, ?)";
+        Date currentDate = new Date(Calendar.getInstance().getTimeInMillis()); // 현재 날짜를 가져와서 java.sql.Date로 변환
+
+        jdbcTemplate.update(sql, post.getUserID(), post.getTitle(), post.getContent(), currentDate);
+        return post;
+    }
+
+    public Post editPost(Post post) {
+        String sql = "UPDATE post SET title = ?, content = ? WHERE postID = ?";
+        jdbcTemplate.update(sql, post.getTitle(), post.getContent(), post.getPostID());
+
         return post;
     }
 

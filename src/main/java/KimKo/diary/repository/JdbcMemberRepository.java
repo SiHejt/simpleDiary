@@ -32,16 +32,13 @@ public class JdbcMemberRepository implements MemberRepository{
 
     @Override
     public Boolean vaildateMember(String userID, String password) {
-        List<Member> member = findMember(userID);
-        if (member == null) {
-            //아이디 없는 경우
+        List<Member> members = findMember(userID);
+
+        if (!members.isEmpty()) {
+            Member member = members.get(0);
+            return member.getPassword().equals(password);
         }
-        else if(member.get(0).getPassword().equals(password)) {
-            //아이디 있고 비밀번호 일치
-        }
-        else {
-            //아이디 있고 비밀번호 불일치
-        }
+
         return false;
     }
 
