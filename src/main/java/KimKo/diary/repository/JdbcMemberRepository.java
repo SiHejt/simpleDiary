@@ -4,8 +4,11 @@ import KimKo.diary.domain.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
+import java.util.Optional;
 
 public class JdbcMemberRepository implements MemberRepository{
 
@@ -16,16 +19,29 @@ public class JdbcMemberRepository implements MemberRepository{
     }
 
     @Override
-    public void saveMember(Member member) {
+    public Member saveMember(Member member) {
+        String sql = "INSERT INTO member (userID, password, userName) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, member.getUserID(), member.getPassword(), member.getUserName());
+        return member;
     }
 
     @Override
-    public Member findByuserID(Long userID) {
-        return null;
+    public List<Member> findMember(String userID) {
+        return jdbcTemplate.query("select * from member where userID = ?", memberRowMapper(), userID);
     }
 
     @Override
-    public boolean vaildateMember(Long userID, Long password) {
+    public Boolean vaildateMember(String userID, String password) {
+        List<Member> member = findMember(userID);
+        if (member == null) {
+            //아이디 없는 경우
+        }
+        else if(member.get(0).getPassword().equals(password)) {
+            //아이디 있고 비밀번호 일치
+        }
+        else {
+            //아이디 있고 비밀번호 불일치
+        }
         return false;
     }
 

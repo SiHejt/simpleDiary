@@ -4,8 +4,9 @@ import KimKo.diary.domain.Member;
 import KimKo.diary.domain.Post;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository {
-    boolean savePost(Post post);
-    List<Post> findPost(Long userID);
+    Post savePost(Post post);
+    Optional<Post> findPost(String userID);
 }

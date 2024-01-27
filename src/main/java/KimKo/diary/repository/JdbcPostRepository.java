@@ -5,9 +5,11 @@ import KimKo.diary.domain.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.Optional;
 
 public class JdbcPostRepository implements PostRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -16,13 +18,14 @@ public class JdbcPostRepository implements PostRepository {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
     @Override
-    public boolean savePost(Post post) {
-        return false;
+    public Post savePost(Post post) {
+        return post;
     }
 
     @Override
-    public List<Post> findPost(Long userID) {
-        return null;
+    public Optional<Post> findPost(String userID) {
+        List<Post> result = jdbcTemplate.query("select * from post where userID = ?", postRowMapper(), userID);
+        return result.stream().findAny();
     }
 
     private RowMapper<Post> postRowMapper() {

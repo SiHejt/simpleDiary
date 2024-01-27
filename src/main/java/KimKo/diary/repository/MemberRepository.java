@@ -2,8 +2,11 @@ package KimKo.diary.repository;
 
 import KimKo.diary.domain.Member;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface MemberRepository {
-    void saveMember(Member member);
-    Member findByuserID(Long userID);
-    boolean vaildateMember(Long userID, Long password);
+    Member saveMember(Member member);
+    List<Member> findMember(String userID);
+    Boolean vaildateMember(String userID, String password);
 }
