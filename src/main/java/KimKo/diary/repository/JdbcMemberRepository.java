@@ -25,13 +25,17 @@ public class JdbcMemberRepository implements MemberRepository{
         return member;
     }
 
+
+    //아이디 중복체크,
     @Override
     public List<Member> findMember(String userID) {
         return jdbcTemplate.query("SELECT * FROM member WHERE userID = ?", memberRowMapper(), userID);
     }
 
+
+    //ID, 비번 확인
     @Override
-    public Boolean vaildateMember(String userID, String password) {
+    public boolean vaildateMember(String userID, String password) {
         List<Member> members = findMember(userID);
 
         if (!members.isEmpty()) {

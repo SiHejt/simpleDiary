@@ -1,7 +1,9 @@
 package KimKo.diary.controller;
 
 import KimKo.diary.domain.Post;
+import KimKo.diary.service.PostService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +15,16 @@ import java.util.List;
 public class HomeController {
     private final PostService postService;
 
+    @Autowired
+    public HomeController(PostService postService) {
+        this.postService = postService;
+    }
+
     @GetMapping("/")
     public String route(HttpSession session) {
-        Long userID = (Long) session.getAttribute("userID");
+        String userID = (String) session.getAttribute("userID");
         if (userID == null) {
-            return "home/login";
+            return "/login";
         }
         return "redirect:/home";
     }
@@ -25,13 +32,13 @@ public class HomeController {
     //하단바, 홈화면에서 글 목록 불러옴. 제목만 보임
     @GetMapping("/home")
     public String homePage(HttpSession session, Model model) {
-        Long userID = (Long) session.getAttribute("userID");
+        String userID = (String) session.getAttribute("userID");
         if (userID == null) {
-            return "home/login";
+            return "/login";
         }
-        List<Post> posts = postService.viewTitles();
+        List<Post> posts = postService.viewTitles(userID);
         model.addAttribute("post", posts);
-        return "home/home";
+        return "/home";
     }
 
     @GetMapping("/more")

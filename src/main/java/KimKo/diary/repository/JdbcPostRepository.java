@@ -29,6 +29,13 @@ public class JdbcPostRepository implements PostRepository {
         return post;
     }
 
+    @Override
+    public void deletePost(Long postID) {
+        String sql = "DELETE FROM post WHERE postID = ?";
+        jdbcTemplate.update(sql, postID);
+    }
+
+    @Override
     public Post editPost(Post post) {
         String sql = "UPDATE post SET title = ?, content = ? WHERE postID = ?";
         jdbcTemplate.update(sql, post.getTitle(), post.getContent(), post.getPostID());
@@ -36,11 +43,19 @@ public class JdbcPostRepository implements PostRepository {
         return post;
     }
 
+    //게시글 전체 조회
     @Override
-    public Optional<Post> findPost(String userID) {
-        List<Post> result = jdbcTemplate.query("SELECT * FROM post WHERE userID = ?", postRowMapper(), userID);
-        return result.stream().findAny();
+    public List<Post> findPostByUserID(String userID) {
+        return jdbcTemplate.query("SELECT * FROM post WHERE userID = ?", postRowMapper(), userID);
     }
+
+
+    //게시글 제목, 내용 조회
+    @Override
+    public List<Post> findPostByPostID(Long postID) {
+        return jdbcTemplate.query("SELECT * FROM post WHERE postID = ?", postRowMapper(), postID);
+    }
+
 
     private RowMapper<Post> postRowMapper() {
         return (rs, rowNum) -> {
