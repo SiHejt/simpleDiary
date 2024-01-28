@@ -22,16 +22,19 @@ public class JdbcPostRepository implements PostRepository {
     @Override
     public Post savePost(Post post) {
         String sql = "INSERT INTO post (userID, title, content, date) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, post.getUserID(), post.getPostID(), post.getTitle(), post.getContent());
         Date currentDate = new Date(Calendar.getInstance().getTimeInMillis());
         jdbcTemplate.update(sql, post.getUserID(), post.getTitle(), post.getContent(), currentDate);
         return post;
     }
 
     @Override
-    public Optional<Post> findPost(String userID) {
-        List<Post> result = jdbcTemplate.query("SELECT * FROM post WHERE userID = ?", postRowMapper(), userID);
-        return result.stream().findAny();
+    public List<Post> findPostByUserID(String userID) {
+        return jdbcTemplate.query("SELECT * FROM post WHERE userID = ?", postRowMapper(), userID);
+    }
+
+    @Override
+    public List<Post> findPostByPostID(Long postID) {
+        return jdbcTemplate.query("SELECT * FROM post WHERE postID = ?", postRowMapper(), postID);
     }
 
     @Override
@@ -39,6 +42,12 @@ public class JdbcPostRepository implements PostRepository {
         String sql = "UPDATE post SET title = ?, content = ? WHERE postID = ?";
         jdbcTemplate.update(sql, post.getTitle(), post.getContent(), post.getPostID());
         return post;
+    }
+
+    @Override
+    public void deletePost(Long postID) {
+        String sql = "DELETE FROM post WHERE postID = ?";
+        jdbcTemplate.update(sql, postID);
     }
 
     private RowMapper<Post> postRowMapper() {

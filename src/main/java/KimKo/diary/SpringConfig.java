@@ -4,6 +4,8 @@ import KimKo.diary.repository.JdbcMemberRepository;
 import KimKo.diary.repository.JdbcPostRepository;
 import KimKo.diary.repository.MemberRepository;
 import KimKo.diary.repository.PostRepository;
+import KimKo.diary.service.MemberService;
+import KimKo.diary.service.PostService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

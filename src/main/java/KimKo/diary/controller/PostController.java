@@ -1,7 +1,9 @@
 package KimKo.diary.controller;
 
 import KimKo.diary.domain.Post;
+import KimKo.diary.service.PostService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,17 @@ public class PostController {
 
     private final PostService postService;
 
+    @Autowired
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
+
     // 하단바, 등록버튼
     @GetMapping("/home/newPost")
     public String newPostPage(HttpSession session) {
-        Long userID = (Long) session.getAttribute("userID");
+        String userID = (String) session.getAttribute("userID");
         if (userID == null) {
-            return "home/login";
+            return "/login";
         }
         return "home/newPost";
     }
@@ -26,12 +33,12 @@ public class PostController {
     //글 등록
     @PostMapping("/home/newPost")
     public String newPost(HttpSession session, PostForm form) {
-        Long userID = (Long) session.getAttribute("userID");
+        String userID = (String) session.getAttribute("userID");
         Post post = new Post();
         post.setTitle(form.getTitle());
         post.setContent(form.getContent());
 
-        postService.save(post, userID);
+        postService.savePost(post, userID);
 
         return "redirect:/home";
     }
@@ -39,12 +46,12 @@ public class PostController {
     //게시글 들어갔을 때 조회
     @GetMapping("/home/viewPost")
     public String viewPostPage(HttpSession session, @RequestParam final Long postID, Model model) {
-        Long userID = (Long) session.getAttribute("userID");
+        String userID = (String) session.getAttribute("userID");
         if (userID == null) {
-            return "home/login";
+            return "/login";
         }
-        Post posts = postService.findPostByID(postID);
-        model.addAttribute("post", posts);
+        Post post = postService.findPostByPostID(postID);
+        model.addAttribute("post", post);
         return "home/viewPost";
         //html에서 id 이동하기
     }
@@ -59,18 +66,18 @@ public class PostController {
     //수정 기능, 하단바
     @GetMapping("/home/viewPost/editPost")
     public String editPostPage(HttpSession session, @RequestParam final Long postID, Model model) {
-        Long userID = (Long) session.getAttribute("userID");
+        String userID = (String) session.getAttribute("userID");
         if (userID == null) {
-            return "home/login";
+            return "/login";
         }
-        Post post = postService.findPostByID(postID);
+        Post post = postService.findPostByPostID(postID);
         model.addAttribute("post", post);
         return "home/editPost";
     }
 
     @PostMapping("/home/viewPost/editPost")
-    public String editPost(@RequestParam final Long postID) {
-        postService.editPostService(postID);
+    public String editPost(@RequestParam final Post post) {
+        postService.editPost(post);
 
         return "redirect:/home";
     }

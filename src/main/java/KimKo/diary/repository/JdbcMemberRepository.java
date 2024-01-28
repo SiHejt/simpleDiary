@@ -31,7 +31,7 @@ public class JdbcMemberRepository implements MemberRepository{
     }
 
     @Override
-    public Boolean vaildateMember(String userID, String password) {
+    public boolean vaildateMember(String userID, String password) {
         List<Member> members = findMember(userID);
         if (!members.isEmpty()) {
             Member member = members.get(0);

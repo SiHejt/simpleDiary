@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface PostRepository {
     Post savePost(Post post);
-    Optional<Post> findPost(String userID);
+    List<Post> findPostByUserID(String userID);
+    List<Post> findPostByPostID(Long postID);
+    public void deletePost(Long postID);
     Post editPost(Post post);
 }
