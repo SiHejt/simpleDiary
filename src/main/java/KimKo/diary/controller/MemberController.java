@@ -49,7 +49,7 @@ public class MemberController {
 
     @GetMapping("/signUp")
     public String signUpPage() {
-        return "home/signUp";
+        return "/signUp";
     }
 
     //아이디등록

@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>login</title>
 </head>
 <body>
+<div class="container">
+    <form action="/login" method="post">
+        <div class="form-group">
+            아이디 : <input type="text" id="userID" name="userID" maxlength="20" required ><br>
+            비밀번호 : <input type="password" id="password" name="password" maxlength="20" required>
+        </div>
 
+        <button type="submit">로그인</button>
+    </form>
+
+    <a href="/signUp">회원 가입</a>
+</div>
 </body>
 </html>

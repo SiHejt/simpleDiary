@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>newPost</title>
 </head>
 <body>
+<div class="container">
+    <form action="/home/newPost" method="post">
+        <div class="form-group">
+            <input type="text" maxlength="20" id="title" name="title" placeholder="글 제목" required><br>
+            <input type="text" id="content" name="content" placeholder="내용" required><br>
+        </div>
 
+        <button type="submit">글 등록</button>
+    </form>
+
+    <a href="/home">글 목록으로</a>
+</div>
 </body>
 </html>

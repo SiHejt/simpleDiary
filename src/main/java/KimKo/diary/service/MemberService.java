@@ -26,7 +26,7 @@ public class MemberService {
             Member newMember = new Member();
             newMember.setUserID(signUpForm.getUserID());
             newMember.setPassword(signUpForm.getPassword());
-            newMember.setUserName(signUpForm.getName());
+            newMember.setUserName(signUpForm.getUserName());
             memberRepository.saveMember(newMember);
             return true;
         }
