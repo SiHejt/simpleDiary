@@ -1,8 +1,8 @@
 package KimKo.diary.controller;
 
 import KimKo.diary.service.MemberService;
+import KimKo.diary.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class MemberController {
     @PostMapping("/login")
     public String login(HttpServletRequest httpServletRequest, LoginForm loginForm, Model model) {
         boolean result = memberService.login(loginForm);
-        if (result) {
+        if (result == true) {
             httpServletRequest.getSession().invalidate();
             HttpSession session = httpServletRequest.getSession(true);
             session.setAttribute("userID", loginForm.getUserID());
@@ -43,25 +43,22 @@ public class MemberController {
 
             return "redirect:/home";
         }
-        model.addAttribute("loginError, true");
+        model.addAttribute("loginError", true);
         return "redirect:/login";
     }
 
     @GetMapping("/signUp")
     public String signUpPage() {
-        return "/home/signUp";
+        return "/signUp";
     }
 
     //아이디등록
     @PostMapping("/signUp")
     public String signUp(SignUpForm signUpForm, Model model) {
         boolean result = memberService.signUp(signUpForm);
-
-        if (result) {
+        if (result == true)
             return "redirect:/login";
-        }
-
-        model.addAttribute("signUpError, true");
+        model.addAttribute("signUpError", true);
         return "redirect:/signUp";
     }
 }

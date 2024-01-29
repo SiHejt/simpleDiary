@@ -4,7 +4,7 @@ public class SignUpForm {
     private String userID;
     private String password;
     private String passwordCheck;
-    private String name;
+    private String userName;
 
     public String getUserID() {
         return userID;
@@ -30,11 +30,11 @@ public class SignUpForm {
         this.passwordCheck = passwordCheck;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

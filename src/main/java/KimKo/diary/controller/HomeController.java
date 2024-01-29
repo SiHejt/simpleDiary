@@ -1,6 +1,7 @@
 package KimKo.diary.controller;
 
 import KimKo.diary.domain.Post;
+import KimKo.diary.service.MemberService;
 import KimKo.diary.service.PostService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class HomeController {
     public String route(HttpSession session) {
         String userID = (String) session.getAttribute("userID");
         if (userID == null) {
-            return "/login";
+            return "redirect:/login";
         }
         return "redirect:/home";
     }
@@ -34,16 +35,16 @@ public class HomeController {
     public String homePage(HttpSession session, Model model) {
         String userID = (String) session.getAttribute("userID");
         if (userID == null) {
-            return "/login";
+            return "redirect:/login";
         }
         List<Post> posts = postService.viewTitles(userID);
-        model.addAttribute("post", posts);
+        model.addAttribute("posts", posts);
         return "/home";
     }
 
     @GetMapping("/more")
     public String more() {
-        return "more";
+        return "/more";
     }
 
 }

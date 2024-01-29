@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>home</title>
 </head>
 <body>
+<div class="container">
+    <div>
+        <input type="text" value='th:text="${post.title}"'>
+        <input type="text" value='th:text="${post.content}"'>
+    </div>
 
+    <button type="submit">수정</button>
+</div>
 </body>
 </html>

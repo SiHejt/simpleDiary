@@ -27,7 +27,7 @@ public class PostController {
         if (userID == null) {
             return "/login";
         }
-        return "/home/newPost";
+        return "home/newPost";
     }
 
     //글 등록
@@ -50,11 +50,9 @@ public class PostController {
         if (userID == null) {
             return "/login";
         }
-
-        //특정 id를 가진 사람의 게시물을 찾는 함수 findPostByID
         Post post = postService.findPostByPostID(postID);
         model.addAttribute("post", post);
-        return "/home/viewPost";
+        return "home/viewPost";
         //html에서 id 이동하기
     }
 
@@ -74,7 +72,7 @@ public class PostController {
         }
         Post post = postService.findPostByPostID(postID);
         model.addAttribute("post", post);
-        return "/home/editPost";
+        return "home/editPost";
     }
 
     @PostMapping("/home/viewPost/editPost")
@@ -83,4 +81,5 @@ public class PostController {
 
         return "redirect:/home";
     }
+
 }
