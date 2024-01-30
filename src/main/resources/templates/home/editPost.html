@@ -2,16 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>home</title>
+    <title>editPost</title>
 </head>
 <body>
 <div class="container">
-    <div>
-        <input type="text" value='th:text="${post.title}"'>
-        <input type="text" value='th:text="${post.content}"'>
-    </div>
+    <form action="/home/viewPost/editPost" method="post">
+        <div class="form-group">
+            <input type="text" maxlength="20" id="title" name="title" th:value="${post.title}" required><br>
+            <input type="text" id="content" name="content" th:value="${post.content}" required><br>
+        </div>
 
-    <button type="submit">수정</button>
+        <input type="hidden" name="postID" th:value="${post.postID}" />
+        <button type="submit">글 등록</button>
+    </form>
+
+    <a href="/home">글 목록으로</a>
 </div>
 </body>
 </html>
