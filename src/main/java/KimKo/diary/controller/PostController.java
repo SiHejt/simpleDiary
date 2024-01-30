@@ -76,7 +76,11 @@ public class PostController {
     }
 
     @PostMapping("/home/viewPost/editPost")
-    public String editPost(@RequestParam final Post post) {
+    public String editPost(@RequestParam final Long postID, PostForm form) {
+        Post post = new Post();
+        post.setPostID(postID);
+        post.setTitle(form.getTitle());
+        post.setContent(form.getContent());
         postService.editPost(post);
 
         return "redirect:/home";

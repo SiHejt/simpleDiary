@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>home</title>
+    <title>viewPost</title>
 </head>
 <body>
 <div class="container">
@@ -13,7 +13,7 @@
     </div>
 
     <a href="/home">글 목록으로</a>
-    <a href="/home/editPost">수정</a>
+    <a th:href="@{/home/viewPost/editPost(postID=${post.postID})}"> 수정 </a>
     <form method="post" action="/home/viewPost">
         <input type="hidden" name="postID" th:value="${post.postID}" />
         <input type="submit" value="삭제" />
