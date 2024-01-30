@@ -1,16 +1,16 @@
 package KimKo.diary.domain;
 
 public class Member {
-    private String UserID;
+    private String userID;
     private String password;
-    private String Username;
+    private String userName;
 
     public String getUserID() {
-        return UserID;
+        return userID;
     }
 
     public void setUserID(String userID) {
-        UserID = userID;
+        this.userID = userID;
     }
 
     public String getPassword() {
@@ -21,11 +21,11 @@ public class Member {
         this.password = password;
     }
 
-    public String getUsername() {
-        return Username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        Username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
