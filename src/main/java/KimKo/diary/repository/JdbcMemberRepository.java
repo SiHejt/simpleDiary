@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class JdbcMemberRepository implements MemberRepository{
-
+//aaa
     private final JdbcTemplate jdbcTemplate;
     @Autowired
     public JdbcMemberRepository(DataSource dataSource) {
@@ -25,18 +25,27 @@ public class JdbcMemberRepository implements MemberRepository{
         return member;
     }
 
+
+    //아이디 중복체크,
     @Override
     public List<Member> findMember(String userID) {
-        return jdbcTemplate.query("select * from member where userID = ?", memberRowMapper(), userID);
+        return jdbcTemplate.query("SELECT * FROM member WHERE userID = ?", memberRowMapper(), userID);
     }
 
+
+    //ID, 비번 확인
     @Override
     public boolean vaildateMember(String userID, String password) {
         List<Member> members = findMember(userID);
+<<<<<<< HEAD
+=======
+
+>>>>>>> c16d0f8e16e156c30e1b2846a4cf5882ce6424c7
         if (!members.isEmpty()) {
             Member member = members.get(0);
             return member.getPassword().equals(password);
         }
+
         return false;
     }
 

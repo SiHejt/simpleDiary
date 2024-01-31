@@ -10,7 +10,12 @@
         <a href="/home/newPost">일기 쓰기</a>
         <ul>
             <li th:each="post : ${posts}">
+<<<<<<< HEAD
                 <a th:href="@{/home/viewPost(postID=${post.postID})}" /><span th:text="${post.title}"></span>
+=======
+                <a th:href="@{/home/viewPost(postID=${post.postID})}" />
+                <span th:text="${post.title}"></span>
+>>>>>>> c16d0f8e16e156c30e1b2846a4cf5882ce6424c7
                 <span th:text="${post.date}"></span>
             </li>
         </ul>

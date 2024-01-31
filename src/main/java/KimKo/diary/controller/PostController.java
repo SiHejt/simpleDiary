@@ -64,7 +64,7 @@ public class PostController {
     }
 
     //수정 기능, 하단바
-    @GetMapping("/home/viewPost/editPost")
+    @GetMapping("/home/editPost")
     public String editPostPage(HttpSession session, @RequestParam final Long postID, Model model) {
         String userID = (String) session.getAttribute("userID");
         if (userID == null) {
@@ -85,4 +85,5 @@ public class PostController {
 
         return "redirect:/home";
     }
+
 }

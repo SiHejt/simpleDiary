@@ -1,6 +1,12 @@
 package KimKo.diary.service;
 
+<<<<<<< HEAD
 import KimKo.diary.domain.Post;
+=======
+import KimKo.diary.controller.PostForm;
+import KimKo.diary.domain.Post;
+import KimKo.diary.repository.MemberRepository;
+>>>>>>> c16d0f8e16e156c30e1b2846a4cf5882ce6424c7
 import KimKo.diary.repository.PostRepository;
 
 import java.util.List;
@@ -32,5 +38,8 @@ public class PostService {
     public List<Post> viewTitles(String userID) {
         return postRepository.findPostByUserID(userID);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> c16d0f8e16e156c30e1b2846a4cf5882ce6424c7
 }
